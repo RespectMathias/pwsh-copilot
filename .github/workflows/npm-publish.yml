@@ -43,6 +43,13 @@ jobs:
           node-version: 20
           registry-url: 'https://registry.npmjs.org'
 
+      # Auto-bump patch version
+      - name: Bump npm version
+        run: |
+          npm version patch --no-git-tag-version
+          VERSION=$(node -p "require('./package.json').version")
+          echo "Publishing version: $VERSION"
+
       # Publish to npm
       - name: Publish package
         env:
