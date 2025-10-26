@@ -47,7 +47,8 @@ jobs:
       - name: Bump npm version
         run: |
           npm version patch --no-git-tag-version
-          echo "Publishing version: $(node -p \"require('./package.json').version\")"
+          VERSION=$(node -p "require('./package.json').version")
+          echo "Publishing version: $VERSION"
 
       # Publish to npm
       - name: Publish package
