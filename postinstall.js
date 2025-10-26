@@ -8,14 +8,11 @@ if (process.platform !== "win32") {
 }
 
 function npmBin() {
-    try {
-        return execSync("npm bin -g", { stdio: ["ignore", "pipe", "ignore"] })
-            .toString()
-            .trim();
-    } catch {
-        return null;
-    }
+    const prefix = process.env.npm_config_prefix;
+    if (!prefix) return null;
+    return join(prefix, "bin");
 }
+
 
 const binDir = npmBin();
 if (!binDir) {
@@ -25,6 +22,20 @@ if (!binDir) {
 
 const src = join(__dirname, "pwsh.exe");
 const dst = join(binDir, "pwsh.exe");
+
+try {
+    const existing = execSync("where pwsh.exe", { stdio: ["pipe", "pipe", "ignore"] })
+        .toString()
+        .split(/\r?\n/)[0]
+        .trim();
+
+    if (existsSync(existing) && !existing.startsWith(binDir)) {
+        console.log("[pwsh-copilot] Real PowerShell 7+ detected. Skipping shim installation.");
+        process.exit(0);
+    }
+} catch {
+
+}
 
 try {
     if (!existsSync(src)) throw new Error("Bundled pwsh.exe missing");
