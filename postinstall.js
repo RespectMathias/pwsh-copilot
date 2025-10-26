@@ -7,21 +7,25 @@ if (process.platform !== "win32") {
     process.exit(0);
 }
 
-function npmBin() {
+function npmGlobalDir() {
     const prefix = process.env.npm_config_prefix;
-    if (!prefix) return null;
-    return join(prefix, "bin");
+    if (prefix) return prefix;
+
+    try {
+        return execSync("npm config get prefix", { encoding: "utf8" }).trim();
+    } catch {
+        return null;
+    }
 }
 
-
-const binDir = npmBin();
-if (!binDir) {
-    console.error("[pwsh-copilot] Could not locate npm global bin directory.");
+const npmDir = npmGlobalDir();
+if (!npmDir) {
+    console.error("[pwsh-copilot] Could not locate npm global directory.");
     process.exit(1);
 }
 
 const src = join(__dirname, "pwsh.exe");
-const dst = join(binDir, "pwsh.exe");
+const dst = join(npmDir, "pwsh.exe");
 
 try {
     const existing = execSync("where pwsh.exe", { stdio: ["pipe", "pipe", "ignore"] })
@@ -29,7 +33,7 @@ try {
         .split(/\r?\n/)[0]
         .trim();
 
-    if (existsSync(existing) && !existing.startsWith(binDir)) {
+    if (existsSync(existing) && !existing.startsWith(npmDir)) {
         console.log("[pwsh-copilot] Real PowerShell 7+ detected. Skipping shim installation.");
         process.exit(0);
     }
@@ -39,9 +43,9 @@ try {
 
 try {
     if (!existsSync(src)) throw new Error("Bundled pwsh.exe missing");
-    mkdirSync(binDir, { recursive: true });
+    mkdirSync(npmDir, { recursive: true });
     copyFileSync(src, dst);
-    console.log(`[pwsh-copilot] Installed in ${dst}`);
+    console.log(`[pwsh-copilot] Installed pwsh.exe to ${dst}`);
 } catch (e) {
     console.error("[pwsh-copilot] Installation failed:", e.message);
     process.exit(1);

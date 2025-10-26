@@ -9,11 +9,13 @@
     "files": [
         "pwsh.exe",
         "postinstall.js",
+        "preuninstall.js",
         "README.md",
         "LICENSE"
     ],
     "scripts": {
-        "postinstall": "node postinstall.js"
+        "postinstall": "node postinstall.js",
+        "preuninstall": "node preuninstall.js"
     },
     "engines": {
         "node": ">=14"
