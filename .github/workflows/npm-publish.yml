@@ -4,8 +4,9 @@
 name: Node.js Package
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - main
 
 env:
   DOTNET_VERSION: '8.0.x'
@@ -41,10 +42,6 @@ jobs:
         with:
           node-version: 20
           registry-url: 'https://registry.npmjs.org'
-
-      # Bump npm version to match release tag
-      - name: Set npm version
-        run: npm version ${GITHUB_REF_NAME#v} --no-git-tag-version
 
       # Publish to npm
       - name: Publish package
