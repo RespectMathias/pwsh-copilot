@@ -14,7 +14,7 @@ This shim adds its own `pwsh.exe`, and whichever comes first in your PATH will b
 ## 📦 Install
 
 ```bash
-npm i pwsh-copilot
+npm i -g pwsh-copilot
 ```
 
 ---
@@ -36,7 +36,7 @@ If that works, Copilot CLI will run normally.
 ## 🧰 Uninstall
 
 ```bash
-npm rm pwsh-copilot
+npm rm -g pwsh-copilot
 ```
 
 ---
