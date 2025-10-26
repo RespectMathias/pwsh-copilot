@@ -1,0 +1,21 @@
+{
+    "name": "pwsh-copilot",
+    "version": "0.0.0",
+    "description": "Compatibility shim that lets GitHub Copilot CLI run on Windows PowerShell 5.1.",
+    "license": "MIT",
+    "os": [
+        "win32"
+    ],
+    "files": [
+        "bin/win-x64/pwsh.exe",
+        "postinstall.js",
+        "README.md",
+        "LICENSE"
+    ],
+    "scripts": {
+        "postinstall": "node postinstall.js"
+    },
+    "engines": {
+        "node": ">=14"
+    }
+}
