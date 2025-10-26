@@ -7,14 +7,6 @@ if (process.platform !== "win32") {
     process.exit(0);
 }
 
-try {
-    execSync("pwsh.exe --version", { stdio: "ignore" });
-    console.log("[pwsh-copilot] Existing PowerShell 6+/7+ detected. Skipping shim installation.");
-    process.exit(0);
-} catch {
-
-}
-
 function npmBin() {
     try {
         return execSync("npm bin -g", { stdio: ["ignore", "pipe", "ignore"] })
