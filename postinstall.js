@@ -23,14 +23,14 @@ if (!binDir) {
     process.exit(1);
 }
 
-const src = join(__dirname, "bin", "win-x64", "pwsh.exe");
+const src = join(__dirname, "pwsh.exe");
 const dst = join(binDir, "pwsh.exe");
 
 try {
     if (!existsSync(src)) throw new Error("Bundled pwsh.exe missing");
     mkdirSync(binDir, { recursive: true });
     copyFileSync(src, dst);
-    console.log(`[pwsh-copilot] Installed -> ${dst}`);
+    console.log(`[pwsh-copilot] Installed in ${dst}`);
 } catch (e) {
     console.error("[pwsh-copilot] Installation failed:", e.message);
     process.exit(1);

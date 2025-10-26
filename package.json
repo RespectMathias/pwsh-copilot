@@ -7,7 +7,7 @@
         "win32"
     ],
     "files": [
-        "bin/win-x64/pwsh.exe",
+        "pwsh.exe",
         "postinstall.js",
         "README.md",
         "LICENSE"
