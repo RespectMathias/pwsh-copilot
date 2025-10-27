@@ -22,8 +22,8 @@ jobs:
 
       - name: Build pwsh.exe
         run: |
-          dotnet publish pwsh.cs
-          mv artifacts/pwsh/pwsh pwsh.exe
+          dotnet publish pwsh.cs -r win-x64
+          mv artifacts/pwsh/pwsh.exe pwsh.exe
 
       - uses: actions/setup-node@v4
         with:
