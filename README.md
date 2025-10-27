@@ -37,6 +37,7 @@ If that works, Copilot CLI will run normally.
 
 ```bash
 npm rm -g pwsh-copilot
+Remove-Item "$env:APPDATA\npm\pwsh.exe" -ErrorAction SilentlyContinue # Remove leftover shim
 ```
 
 ---

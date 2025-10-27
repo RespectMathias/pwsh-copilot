@@ -14,9 +14,7 @@
         "LICENSE"
     ],
     "scripts": {
-        "postinstall": "node postinstall.js",
-        "preuninstall": "node preuninstall.js",
-        "uninstall": "node preuninstall.js"
+        "postinstall": "node postinstall.js"
     },
     "engines": {
         "node": ">=14"
