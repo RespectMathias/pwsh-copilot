@@ -1,22 +1,15 @@
 {
     "name": "pwsh-copilot",
     "version": "0.0.0",
-    "description": "Compatibility shim that lets GitHub Copilot CLI run on Windows PowerShell 5.1.",
+    "description": "GitHub Copilot CLI compatibility shim for Windows PowerShell 5.1",
     "license": "MIT",
     "os": [
         "win32"
     ],
     "files": [
-        "pwsh.exe",
-        "postinstall.js",
-        "preuninstall.js",
-        "README.md",
-        "LICENSE"
+        "pwsh.exe"
     ],
     "scripts": {
-        "postinstall": "node postinstall.js"
-    },
-    "engines": {
-        "node": ">=14"
+        "postinstall": "node -e \"if(process.platform==='win32')try{const{copyFileSync:c,mkdirSync:m}=require('fs'),{join:j}=require('path'),p=require('child_process').execSync('npm config get prefix',{encoding:'utf8'}).trim();m(p,{recursive:true});c(j(__dirname,'pwsh.exe'),j(p,'pwsh.exe'));console.log('[pwsh-copilot] Installed')}catch(e){console.error('[pwsh-copilot] Install failed:',e.message);process.exit(1)}\""
     }
 }
