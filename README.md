@@ -25,7 +25,7 @@ npm i -g pwsh-copilot
 pwsh --version
 # PowerShell 7.5.4
 
-pwsh -NoProfile -Command "$PSVersionTable.PSVersion"
+$PSVersionTable.PSVersion
 # shows 5.1.x
 ```
 
