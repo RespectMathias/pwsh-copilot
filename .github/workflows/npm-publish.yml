@@ -14,7 +14,7 @@ jobs:
       - uses: ilammy/msvc-dev-cmd@v1
       - name: Build pwsh.exe
         run: |
-          cl /O2 /GL /Gy /DNDEBUG /std:c++latest pwsh.cpp /link /RELEASE
+          cl /O2 /GL /Gy /DNDEBUG /std:c++20 /EHsc pwsh.cpp /link /RELEASE Shlwapi.lib
 
       - uses: actions/setup-node@v4
         with:
