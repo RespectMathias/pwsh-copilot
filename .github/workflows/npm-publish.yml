@@ -14,8 +14,8 @@ jobs:
 
       - name: Build pwsh.exe
         run: |
-          sudo apt-get install -y g++-mingw-w64-x86-64
-          x86_64-w64-mingw32-g++ -O3 -DNDEBUG -std=c++2b -static -s -o pwsh.exe pwsh.cpp
+          sudo apt-get install -y --no-install-recommends g++-mingw-w64-x86-64
+          x86_64-w64-mingw32-g++ -O3 -flto -DNDEBUG -std=c++2b -static -s -o pwsh.exe pwsh.cpp
 
       - uses: actions/setup-node@v4
         with:
@@ -25,11 +25,8 @@ jobs:
       - name: Bump npm version
         run: |
           CURRENT_VERSION=$(curl -s https://registry.npmjs.org/pwsh-copilot/latest | jq -r '.version' 2>/dev/null || echo "0.0.0")
-          echo "Current published version: $CURRENT_VERSION"
           npm version $CURRENT_VERSION --no-git-tag-version --allow-same-version
           npm version patch --no-git-tag-version
-          NEW_VERSION=$(node -p "require('./package.json').version")
-          echo "New version: $NEW_VERSION"
 
       - name: Publish package
         env:
