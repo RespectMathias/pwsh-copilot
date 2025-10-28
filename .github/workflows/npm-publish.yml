@@ -12,10 +12,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup MinGW
+        uses: egor-tensin/setup-mingw@v2.2.0
+        with:
+          platform: x64
+
       - name: Build pwsh.exe
         run: |
-          sudo apt-get install -y --no-install-recommends g++-mingw-w64-x86-64
-          x86_64-w64-mingw32-g++ -O3 -flto -DNDEBUG -std=c++2b -static -s -o pwsh.exe pwsh.cpp
+          x86_64-w64-mingw32-g++ -O3 -DNDEBUG -std=c++2b -static -s -o pwsh.exe pwsh.cpp
 
       - uses: actions/setup-node@v4
         with:
