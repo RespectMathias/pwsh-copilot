@@ -1,6 +1,6 @@
 # pwsh-copilot
 
-GitHub Copilot CLI compatibility shim for PowerShell on Windows.
+Use GitHub Copilot CLI in PowerShell 5.1 on Windows.
 
 ## Install
 
@@ -24,6 +24,7 @@ Remove-Item "$env:APPDATA\npm\pwsh.exe" -ErrorAction SilentlyContinue # Remove l
 
 ## How it works
 
+* Installs GitHub Copilot CLI (`@github/copilot`)
 * Fakes `pwsh --version` → prints `PowerShell 7.5.4`
 * Forwards all other arguments to the system’s `powershell.exe`
 

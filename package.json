@@ -1,7 +1,13 @@
 {
     "name": "pwsh-copilot",
     "version": "0.0.0",
-    "description": "GitHub Copilot CLI compatibility shim for Windows PowerShell 5.1",
+    "description": "Use GitHub Copilot CLI in PowerShell 5.1 on Windows",
+    "bin": {
+        "copilot": "node_modules/@github/copilot/index.js"
+    },
+    "dependencies": {
+        "@github/copilot": "latest"
+    },
     "license": "MIT",
     "os": [
         "win32"
